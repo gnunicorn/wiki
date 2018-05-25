@@ -47,15 +47,23 @@ params: [
 
 Request
 ```bash
-curl --data '{"method":"parity_subscribe","params":["eth_getBalance",["0xcd2a3d9f938e13cd947ec05abc7fe734df8dd826","latest"]],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST localhost:8545
+wscat -c localhost:8546
+> {"method":"parity_subscribe","params":["eth_getBalance",["0x004702bdcC3C7dbFfd943136107E70B827028600","latest"]],"id":1,"jsonrpc":"2.0"}
 ```
 
 Response
 ```js
 {
-  "id": 1,
-  "jsonrpc": "2.0",
-  "result": "0x416d77337e24399d"
+    "jsonrpc": "2.0",
+    "result": "0x070fa1c4d1b3fd81",
+    "id": 1
+} {
+    "jsonrpc": "2.0",
+    "method": "parity_subscription",
+    "params": {
+        "result": "0x168e0074d33c31f18",
+        "subscription": "0x070fa1c4d1b3fd81"
+    }
 }
 ```
 
@@ -70,7 +78,7 @@ Unsubscribes from a subscription.
 0. `String` - Subscription ID
 
 ```js
-params: ["0x416d77337e24399d"]
+params: ["0x070fa1c4d1b3fd81"]
 ```
 
 #### Returns
@@ -81,7 +89,8 @@ params: ["0x416d77337e24399d"]
 
 Request
 ```bash
-curl --data '{"method":"parity_unsubscribe","params":["0x416d77337e24399d"],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST localhost:8545
+wscat -c localhost:8546
+> {"method":"parity_unsubscribe","params":["0x070fa1c4d1b3fd81"],"id":1,"jsonrpc":"2.0"}
 ```
 
 Response
